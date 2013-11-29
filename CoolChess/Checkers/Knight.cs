@@ -25,51 +25,87 @@ namespace CoolChess.Checkers
             return this._color;
         }
 
-        public List<Position> getAvailableMoves(Position p)
+        public List<List<Position>> getAvailableMoves(Position p)
         {
-            List<Position> positionList = new List<Position>();
+            List<List<Position>> positionList = new List<List<Position>>();
+            List<Position> t = new List<Position>();
             // Up, Left
             if (p.m - 2 >= 0 && p.n - 1 >= 0)
             {
-                positionList.Add(new Position(p.n - 1, p.m - 2));
+                t.Add(new Position(p.n - 1, p.m - 2));
             }
+            add(positionList, t);
+            
             // Up, Right
+            t = new List<Position>();
             if (p.m - 2 >= 0 && p.n + 1 < 8)
             {
-                positionList.Add(new Position(p.n + 1, p.m - 2));
+                t.Add(new Position(p.n + 1, p.m - 2));
             }
+            add(positionList, t);
+
             // Right, Up
+            t = new List<Position>();
             if (p.m - 1 >= 0 && p.n + 2 < 8)
             {
-                positionList.Add(new Position(p.n + 2, p.m - 1));
+                t.Add(new Position(p.n + 2, p.m - 1));
             }
+            add(positionList, t);
+
             // Right, Down
+            t = new List<Position>();
             if (p.m + 1 < 8 && p.n + 2 < 8)
             {
-                positionList.Add(new Position(p.n + 2, p.m + 1));
+                t.Add(new Position(p.n + 2, p.m + 1));
             }
+            add(positionList, t);
+
             // Down, Right
+            t = new List<Position>();
             if (p.m + 2 < 8 && p.n + 1 < 8)
             {
-                positionList.Add(new Position(p.n + 1, p.m + 2));
+                t.Add(new Position(p.n + 1, p.m + 2));
             }
+            add(positionList, t);
+
             // Down, Left
+            t = new List<Position>();
             if (p.m + 2 < 8 && p.n - 1 >= 0)
             {
-                positionList.Add(new Position(p.n - 1, p.m + 2));
+                t.Add(new Position(p.n - 1, p.m + 2));
             }
+            add(positionList, t);
+
             // Left, Down
+            t = new List<Position>();
             if (p.m + 1 < 8 && p.n - 2 >= 0)
             {
-                positionList.Add(new Position(p.n - 2, p.m + 1));
+                t.Add(new Position(p.n - 2, p.m + 1));
             }
+            add(positionList, t);
+
             // Left, Up
+            t = new List<Position>();
             if (p.m - 1 >= 0 && p.n - 2 >= 0)
             {
-                positionList.Add(new Position(p.n - 2, p.m - 1));
+                t.Add(new Position(p.n - 2, p.m - 1));
             }
+            add(positionList, t);
 
             return positionList;
+        }
+
+        public List<List<Position>> getCaptureMoves(Position p)
+        {
+            return getAvailableMoves(p);
+        }
+
+        private void add(List<List<Position>> listlist, List<Position> list)
+        {
+            if (list.Count() > 0)
+            {
+                listlist.Add(list);
+            }
         }
     }
 }

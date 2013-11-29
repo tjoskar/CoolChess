@@ -28,33 +28,57 @@ namespace CoolChess.Checkers
             return this._color;
         }
 
-        public List<Position> getAvailableMoves(Position p)
+        public List<List<Position>> getAvailableMoves(Position p)
         {
-            List<Position> positionList = new List<Position>();
+            List<List<Position>> positionList = new List<List<Position>>();
+            List<Position> t = new List<Position>();
             // Vertically
             // Down
             for (int m = p.m + 1; m < 8; m++)
             {
-                positionList.Add(new Position(p.n, m));
+                t.Add(new Position(p.n, m));
             }
+            add(positionList, t);
+
             // Up
+            t = new List<Position>();
             for (int m = p.m - 1; m >= 0; m--)
             {
-                positionList.Add(new Position(p.n, m));
+                t.Add(new Position(p.n, m));
             }
+            add(positionList, t);
 
             // Horizontal
             // Right
+            t = new List<Position>();
             for (int n = p.n + 1; n < 8; n++)
             {
-                positionList.Add(new Position(n, p.m));
+                t.Add(new Position(n, p.m));
             }
+            add(positionList, t);
+
             // Left
+            t = new List<Position>();
             for (int n = p.n - 1; n >= 0; n--)
             {
-                positionList.Add(new Position(n, p.m));
+                t.Add(new Position(n, p.m));
             }
+            add(positionList, t);
+
             return positionList;
+        }
+
+        public List<List<Position>> getCaptureMoves(Position p)
+        {
+            return getAvailableMoves(p);
+        }
+
+        private void add(List<List<Position>> listlist, List<Position> list)
+        {
+            if (list.Count() > 0)
+            {
+                listlist.Add(list);
+            }
         }
     }
 }

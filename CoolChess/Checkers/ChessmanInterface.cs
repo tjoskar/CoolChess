@@ -13,5 +13,7 @@ namespace CoolChess.Checkers
         players getColor();
 
         List<List<Position>> getAvailableMoves(Position p);
+
+        List<List<Position>> getCaptureMoves(Position p);
     }
 }

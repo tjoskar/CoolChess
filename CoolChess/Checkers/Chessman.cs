@@ -42,5 +42,15 @@ namespace CoolChess.Checkers
         {
             return _pice.getAvailableMoves(p);
         }
+
+        public List<List<Position>> getCaptureMoves(Position p)
+        {
+            return _pice.getCaptureMoves(p);
+        }
+
+        public object getType()
+        {
+            return _pice.GetType();
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using CoolChess.Checkers;
+using System.Diagnostics;
 
 namespace CoolChess
 {
@@ -13,7 +14,8 @@ namespace CoolChess
         private Cell[,] _cells;
         private players _color;
         private Position _selected = null;
-        private List<List<Position>> _availableMovs = new List<List<Position>>();
+        private List<List<Position>> _availableMoves = new List<List<Position>>();
+        private List<List<Position>> _captureMoves = new List<List<Position>>();
 
         public Player(Cell[,] cells, players color)
         {
@@ -44,31 +46,48 @@ namespace CoolChess
 
         public bool mouseClick(Position p)
         {
-            System.Diagnostics.Debug.WriteLine("Player mouseClick");
-            Cell cell = this._cells[p.m, p.n];
+            Cell cell = this._cells[p.m, p.n]; // Selected cell
             if (cell.hasPiece() && cell.hasColor(this._color)) // The cell contain a chessman of our own
             {
-                if (this._selected != null) // The user selected a new chessman
+                // If the user select a new chessman we must reset the bord to its default color
+                if (this._selected != null)
                 {
                     this.resetBoard();
                 }
 
                 this._selected = p;
                 cell.setSelected();
-                this._availableMovs = cell.getPiece().getAvailableMoves(p);
-                foreach (Position pos in this._availableMovs)
+                // Available moves and capture moves are the same for all chessmen except pawn
+                this._availableMoves = cell.getPiece().getAvailableMoves(p);
+                this._captureMoves = cell.getPiece().getCaptureMoves(p);
+                foreach (List<Position> posList in this._availableMoves)
                 {
-                    Cell c = this._cells[pos.m, pos.n];
-                    if (c.hasPiece())
+                    foreach (Position pos in posList)
                     {
-                        if (!c.hasColor(this._color)) // No friendly fire
+                        Cell c = this._cells[pos.m, pos.n];
+                        if (c.hasPiece())
                         {
-                            c.setTarget();
+                            // We can not go any further if the cell already has a piece. 
+                            break;
                         }
-                    }
-                    else  // The cell is avaiable
-                    {
                         c.setAvailable();
+                    }
+                }
+
+                foreach (List<Position> posList in this._captureMoves)
+                {
+                    foreach (Position pos in posList)
+                    {
+                        Cell c = this._cells[pos.m, pos.n];
+                        if (c.hasPiece())
+                        {
+                            if (!c.hasColor(this._color)) // No friendly fire
+                            {
+                                c.setTarget();
+                            }
+                            // We can not go any further so lets break.
+                            break;
+                        }
                     }
                 }
             }
@@ -76,19 +95,51 @@ namespace CoolChess
             {
                 // Should we move?
                 // Check if the current cell is within range
-                foreach (Position pos in this._availableMovs)
+                foreach (List<Position> posList in this._availableMoves)
                 {
-                    if (pos.m == p.m && pos.n == p.n)
+                    foreach (Position pos in posList)
                     {
-                        System.Diagnostics.Debug.WriteLine("Movie it");
-                        cell.setPiece(this._cells[this._selected.m, this._selected.n].getPiece());
-                        this._cells[this._selected.m, this._selected.n].removePiece();
-                        this._selected = null;
-                        return true;
+                        if (this._cells[pos.m, pos.n].hasPiece())
+                        {
+                            // We can not move to a cell that already has a piece.
+                            // However, we may be able to capture this piece but that is a later problem.
+                            break;
+                        }
+                        if (pos.m == p.m && pos.n == p.n)
+                        {
+                            // Alright, let's move
+                            movePice(this._cells[this._selected.m, this._selected.n], cell);    // Move the pice
+                            this._selected = null;                                              // Remove any trace
+                            return true;                                                        // And return true, ie. we have made our move
+                        }
+                    }
+                }
+
+                foreach (List<Position> posList in this._captureMoves)
+                {
+                    foreach (Position pos in posList)
+                    {
+                        // The clicked cell is the same as 'pos' and the cell as a pice and it is not one of ours.. Let's capture it.
+                        if (pos.m == p.m && pos.n == p.n && this._cells[pos.m, pos.n].hasPiece() && !this._cells[pos.m, pos.n].hasColor(this._color))
+                        {
+                            movePice(this._cells[this._selected.m, this._selected.n], cell);    // Move the pice
+                            this._selected = null;                                              // Remove any trace
+                            return true;                                                        // And return true, ie. we have made our move
+                        }
+                        else if (pos.m == p.m && pos.n == p.n || this._cells[pos.m, pos.n].hasPiece())
+                        {
+                            break;
+                        }
                     }
                 }
             }
             return false;
+        }
+
+        private void movePice(Cell from, Cell to)
+        {
+            to.setPiece(from.getPiece());
+            from.removePiece();
         }
 
         private void resetBoard()

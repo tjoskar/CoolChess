@@ -29,35 +29,53 @@ namespace CoolChess.Checkers
         {
             List<List<Position>> positionList = new List<List<Position>>();
             List<Position> t = new List<Position>();
+            
             // Diagonal 
             // Right Down
             for (int m = p.m + 1, n = p.n + 1; m < 8 && n < 8; m++, n++)
             {
                 t.Add(new Position(n, m));
             }
-            positionList.Add(t);
-            t.Clear();
+            add(positionList, t);
+
             // Left Down
+            t = new List<Position>();
             for (int m = p.m + 1, n = p.n - 1; m < 8 && n >= 0; m++, n--)
             {
                 t.Add(new Position(n, m));
             }
-            positionList.Add(t);
-            t.Clear();
+            add(positionList, t);
+
             // Left Up
+            t = new List<Position>();
             for (int m = p.m - 1, n = p.n - 1; m >= 0 && n >= 0; m--, n--)
             {
                 t.Add(new Position(n, m));
             }
-            positionList.Add(t);
-            t.Clear();
+            add(positionList, t);
+
             // Right Up
+            t = new List<Position>();
             for (int m = p.m - 1, n = p.n + 1; m >= 0 && n < 8; m--, n++)
             {
                 t.Add(new Position(n, m));
             }
-            positionList.Add(t);
+            add(positionList, t);
+
             return positionList;
+        }
+
+        public List<List<Position>> getCaptureMoves(Position p)
+        {
+            return getAvailableMoves(p);
+        }
+
+        private void add(List<List<Position>> listlist, List<Position> list)
+        {
+            if (list.Count() > 0)
+            {
+                listlist.Add(list);
+            }
         }
     }
 }
