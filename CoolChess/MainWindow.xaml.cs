@@ -72,6 +72,34 @@ namespace CoolChess
             borad.mouseClick(p);
         }
 
+        public void setGameOver(players winner)
+        {
+            if (winner == players.Black)
+            {
+                this.GameOver.Content = "Black Wins";
+            }
+            else if (winner == players.White)
+            {
+                this.GameOver.Content = "White Wins";
+            }
+            else
+            {
+                this.GameOver.Content = "";
+            }
+        }
+
+        public void setWhoseTurn(players currentTurn)
+        {
+            if (currentTurn == players.Black)
+            {
+                this.WhoseTurn = "Black";
+            }
+            else if (currentTurn == players.White)
+            {
+                this.WhoseTurn = "White";
+            }
+        }
+
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             if (PropertyChanged != null)

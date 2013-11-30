@@ -18,7 +18,7 @@ namespace CoolChess
         private Player _blackPlayer;
         private Player _whitePlayer;
         private MainWindow _mainWindow;
-        public players currentTurn { get; set; }
+        private players _currentTurn { get; set; }
 
         public Board(MainWindow mainWindow)
         {
@@ -32,8 +32,8 @@ namespace CoolChess
             this.paintBoard();
             this._blackPlayer = new Player(_cells, players.Black);
             this._whitePlayer = new Player(_cells, players.White);
-            this.currentTurn = players.White;
-            _mainWindow.WhoseTurn = "White";
+            this._currentTurn = players.White;
+            this._mainWindow.setWhoseTurn(this._currentTurn);
         }
 
         /* This will reset the whole game board */
@@ -78,9 +78,9 @@ namespace CoolChess
 
         public double getCellWidth()
         {
-            if (_cells.Length > 0)
+            if (this._cells.Length > 0)
             {
-                return _cells[0, 0].ActualWidth;
+                return this._cells[0, 0].ActualWidth;
             }
             else
             {
@@ -90,9 +90,9 @@ namespace CoolChess
 
         public double getCellHeight()
         {
-            if (_cells.Length > 0)
+            if (this._cells.Length > 0)
             {
-                return _cells[0, 0].ActualHeight;
+                return this._cells[0, 0].ActualHeight;
             }
             else
             {
@@ -103,24 +103,56 @@ namespace CoolChess
         /* Forwrd mouse click to the current player */
         public void mouseClick(Position p)
         {
-            if (this.currentTurn == players.Black)
+            if (this._currentTurn == players.Black)
             {
-                if (_blackPlayer.mouseClick(p))
+                if (this._blackPlayer.mouseClick(p))
                 {
-                    this.resetBoard();
-                    this.currentTurn = players.White;
-                    _mainWindow.WhoseTurn = "White";
+                    this.swapPlayer();
                 }
             }
-            else
+            else if (this._currentTurn == players.White)
             {
-                if (_whitePlayer.mouseClick(p))
+                if (this._whitePlayer.mouseClick(p))
                 {
-                    this.resetBoard();
-                    this.currentTurn = players.Black;
-                    _mainWindow.WhoseTurn = "Black";
+                    this.swapPlayer();
                 }
             }
+        }
+
+        private void swapPlayer()
+        {
+            this.resetBoard();
+            if (this._currentTurn == players.White)
+            {
+                if (this._blackPlayer.isKingDead())
+                {
+                    this.gameOver();
+                }
+                else
+                {
+                    this._currentTurn = players.Black;
+                    this._mainWindow.setWhoseTurn(this._currentTurn);
+                }
+            }
+            else if (this._currentTurn == players.Black)
+            {
+                if (this._whitePlayer.isKingDead())
+                {
+                    this.gameOver();
+                }
+                else
+                {
+                    this._currentTurn = players.White;
+                    this._mainWindow.setWhoseTurn(this._currentTurn);
+                }
+            }
+
+        }
+
+        private void gameOver()
+        {
+            this._mainWindow.setGameOver(this._currentTurn);
+            this._currentTurn = players.None;
         }
     }
 }

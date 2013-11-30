@@ -36,6 +36,7 @@
                 <TextBlock Text="{Binding WhoseTurn}"></TextBlock>
             </TextBlock>
         </Label>
+        <Label x:Name="GameOver" Content="" Grid.Column="6" HorizontalAlignment="Center" Margin="-400,-30,0,0" Grid.Row="4" VerticalAlignment="Top" Foreground="#FF338726" FontSize="72" Panel.ZIndex="100"/>
 
     </Grid>
 </Window>
