@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoolChess.Checkers
 {
-    class King : ChessmanInterface
+    public class King : ChessmanInterface
     {
         private players _color;
 
@@ -29,10 +29,17 @@ namespace CoolChess.Checkers
         {
             List<List<Position>> positionList = new List<List<Position>>();
             List<Position> t = new List<Position>();
+
             // Up
             if (p.m - 1 >= 0)
             {
                 t.Add(new Position(p.n, p.m - 1));
+            }
+
+            // Up, Right
+            if (p.n + 1 < 8 && p.m - 1 >= 0)
+            {
+                t.Add(new Position(p.n + 1, p.m - 1));
             }
 
             // Right
@@ -41,10 +48,22 @@ namespace CoolChess.Checkers
                 t.Add(new Position(p.n + 1, p.m));
             }
 
+            // Down, Right
+            if (p.n + 1 < 8 && p.m + 1 < 8)
+            {
+                t.Add(new Position(p.n + 1, p.m + 1));
+            }
+
             // Down
             if (p.m + 1 < 8)
             {
                 t.Add(new Position(p.n, p.m + 1));
+            }
+
+            // Down, Left
+            if (p.n - 1 >= 0 && p.m + 1 < 8)
+            {
+                t.Add(new Position(p.n - 1, p.m + 1));
             }
 
             // Left
@@ -52,6 +71,13 @@ namespace CoolChess.Checkers
             {
                 t.Add(new Position(p.n - 1, p.m));
             }
+
+            // Up, Left
+            if (p.n - 1 >= 0 && p.m - 1 >= 0)
+            {
+                t.Add(new Position(p.n - 1, p.m - 1));
+            }
+
             positionList.Add(t);
 
             return positionList;

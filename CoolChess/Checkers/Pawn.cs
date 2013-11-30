@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace CoolChess.Checkers
 {
-    class Pawn : ChessmanInterface
+    public class Pawn : ChessmanInterface
     {
         private players _color;
 
+        public Pawn() {}
+        
         public Pawn(players color)
         {
             this._color = color;
@@ -89,7 +91,6 @@ namespace CoolChess.Checkers
                 }
                 add(positionList, t);
             }
-            positionList.Add(t);
             return positionList;
         }
 

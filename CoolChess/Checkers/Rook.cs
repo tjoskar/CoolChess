@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace CoolChess.Checkers
 {
-    class Rook : ChessmanInterface
+    public class Rook : ChessmanInterface
     {
         private players _color;
 

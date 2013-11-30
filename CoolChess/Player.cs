@@ -144,22 +144,9 @@ namespace CoolChess
 
         public bool isKingDead()
         {
-
-            /*Cell c = new Cell();
-            c.setPiece(new Chessman(new King(this._color)));
-            bool hasPiece = c.hasPiece();
-            bool hasColor = c.hasColor(this._color);
-            object type = c.getPiece().getType();
-            bool isKing = type == typeof(King);
-            if (hasPiece && hasColor && isKing)
-            {
-                return false;
-            }
-            return false;*/
-
             foreach (Cell cell in this._cells)
             {
-                if (cell.hasPiece() && cell.hasColor(this._color) && cell.getPiece().getType() == typeof(King))
+                if (cell.hasPiece() && cell.hasColor(this._color) && (Type)cell.getPiece().getType() == typeof(King))
                 {
                     return false;
                 }

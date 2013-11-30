@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoolChess.Checkers
 {
-    class Knight : ChessmanInterface
+    public class Knight : ChessmanInterface
     {
         private players _color;
 
