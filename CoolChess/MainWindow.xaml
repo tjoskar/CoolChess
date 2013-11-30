@@ -27,7 +27,9 @@
             <RowDefinition/>
             <RowDefinition Height="18"/>
         </Grid.RowDefinitions>
-        <Button Content="New Game" Grid.Column="8" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="startButton_Click"/>
+        <Button Content="New Game" Grid.Column="8" Grid.Row="7" HorizontalAlignment="Center" Width="75"  Click="startButton_Click" VerticalAlignment="Center" />
+        <Button Content="Load Game" Grid.Column="8" Grid.Row="6" HorizontalAlignment="Center" Width="75" Click="loadButton_Click" VerticalAlignment="Top" Name="loadButton" Visibility="Hidden"/>
+        <Button Content="Save Game" Grid.Column="8" Grid.Row="6" HorizontalAlignment="Center" Width="75" Click="saveButton_Click" VerticalAlignment="Bottom"/>
         <Label Content="Cool Chess" Grid.Column="8" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Foreground="#FF338726" FontSize="24" FontFamily="Segoe UI Light"/>
         <Label x:Name="WhoseTurnControl" Grid.Column="8" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock>

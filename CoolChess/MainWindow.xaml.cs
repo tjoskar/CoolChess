@@ -51,11 +51,6 @@ namespace CoolChess
             this.borad = new Board(this);
         }
 
-        private void startButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.borad.createNewBorad();
-        }
-
         /*
          * Calculate which cell the user click on and forward the call
         */
@@ -98,6 +93,27 @@ namespace CoolChess
             {
                 this.WhoseTurn = "White";
             }
+        }
+
+        public void makeLoadButtoVisible()
+        {
+            this.loadButton.Visibility = Visibility.Visible;
+        }
+
+        private void loadButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.borad.loadSavedState();
+        }
+
+        private void saveButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.borad.saveGame();
+            this.makeLoadButtoVisible();
+        }
+
+        private void startButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.borad.createNewBorad();
         }
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
