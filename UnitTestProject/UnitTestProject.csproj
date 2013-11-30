@@ -59,6 +59,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="PlayerTest.cs" />
+    <Compile Include="PositionTest.cs" />
     <Compile Include="TestAvailableMoves.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCaptureMoves.cs" />

@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace CoolChess
 {
-    class Player
+    public class Player
     {
         private Cell[,] _cells;
         private players _color;
@@ -136,7 +136,7 @@ namespace CoolChess
             return false;
         }
 
-        private void movePice(Cell from, Cell to)
+        public void movePice(Cell from, Cell to)
         {
             to.setPiece(from.getPiece());
             from.removePiece();
