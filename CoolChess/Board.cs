@@ -169,36 +169,39 @@ namespace CoolChess
             State state = Momento.getInstance().fetchState();
             IQueryable<CellState> cellSates = Momento.getInstance().fetchCellState(state);
 
+            this.paintBoard();
+
             foreach (CellState cellState in cellSates)
             {
                 if (cellState.m >= 0 && cellState.m < 8 && cellState.n >= 0 && cellState.n < 8)
                 {
-                    switch ((chessmen) cellState.pice)
+                    switch ((chessmen)cellState.pice)
                     {
                         case chessmen.Bishop:
-                            this._cells[(int)cellState.n, (int)cellState.m].setPiece(new Chessman(new Bishop((players) cellState.color)));
-                        break;
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Bishop((players)cellState.color)));
+                            break;
                         case chessmen.King:
-                            this._cells[(int)cellState.n, (int)cellState.m].setPiece(new Chessman(new King((players) cellState.color)));
-                        break;
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new King((players)cellState.color)));
+                            break;
                         case chessmen.Knight:
-                            this._cells[(int)cellState.n, (int)cellState.m].setPiece(new Chessman(new Knight((players) cellState.color)));
-                        break;
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Knight((players)cellState.color)));
+                            break;
                         case chessmen.Pawn:
-                            this._cells[(int)cellState.n, (int)cellState.m].setPiece(new Chessman(new Pawn((players) cellState.color)));
-                        break;
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Pawn((players)cellState.color)));
+                            break;
                         case chessmen.Queen:
-                            this._cells[(int)cellState.n, (int)cellState.m].setPiece(new Chessman(new Queen((players) cellState.color)));
-                        break;
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Queen((players)cellState.color)));
+                            break;
                         case chessmen.Rook:
-                            this._cells[(int)cellState.n, (int)cellState.m].setPiece(new Chessman(new Rook((players) cellState.color)));
-                        break;
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Rook((players)cellState.color)));
+                            break;
                         default:
-                        break;
+                            break;
                     }
                 }
             }
-            this._currentTurn = (players) state.current_turn;
+            this._currentTurn = (players)state.current_turn;
+            this._mainWindow.setWhoseTurn(this._currentTurn);
         }
     }
 }

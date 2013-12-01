@@ -110,5 +110,10 @@ namespace CoolChess.Checkers
                 listlist.Add(list);
             }
         }
+
+        public chessmen getType()
+        {
+            return chessmen.Queen;
+        }
     }
 }

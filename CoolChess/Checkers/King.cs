@@ -87,5 +87,10 @@ namespace CoolChess.Checkers
         {
             return getAvailableMoves(p);
         }
+
+        public chessmen getType()
+        {
+            return chessmen.King;
+        }
     }
 }

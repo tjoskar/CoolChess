@@ -12,6 +12,8 @@ namespace CoolChess
 
         private StateLINQDataContext db;
         private static Momento instance = null;
+        private static int stateID = 0;
+        private static int cellStateID = 0;
 
         private Momento()
         {
@@ -29,8 +31,11 @@ namespace CoolChess
 
         public void saveState(players currentTurn, Cell[,] cells)
         {
-            this.db.ExecuteCommand("delete from State");
-            State s = new State() { current_turn = (int)currentTurn };
+            this.db.ExecuteCommand("TRUNCATE TABLE State");
+            State s = new State() {
+                current_turn = (int)currentTurn,
+                Id = stateID++
+            };
             this.db.States.InsertOnSubmit(s);
             this.db.SubmitChanges();
 
@@ -64,24 +69,22 @@ namespace CoolChess
 
         private void saveCells(State state, Cell[,] cells)
         {
-            this.db.ExecuteCommand("delete from CellState");
+            this.db.ExecuteCommand("TRUNCATE TABLE CellState");
             Cell cell;
-            int i = 0;
             for (int m = 0; m < 8; m++)
             {
                 for (int n = 0; n < 8; n++)
                 {
                     cell = cells[m, n];
                     if (cell.hasPiece()) {
-                        i++;
                         this.db.CellStates.InsertOnSubmit(
                             new CellState() {
-                                Id = i,
+                                Id = cellStateID++,
                                 color = (int)cell.getPiece().getColor(),
                                 m = m,
                                 n = n,
                                 state_id = state.Id,
-                                pice = 0
+                                pice = (int)cell.getPiece().getType()
                             }
                         );
                         this.db.SubmitChanges();

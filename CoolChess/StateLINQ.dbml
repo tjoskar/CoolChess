@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="StateDatebase" Class="StateLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\StateDatebase.mdf;Integrated Security=True" SettingsObjectName="CoolChess.Properties.Settings" SettingsPropertyName="StateDatebaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.State" Member="States">
+    <Type Name="State">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="current_turn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.CellState" Member="CellStates">
     <Type Name="CellState">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -8,12 +14,6 @@
       <Column Name="pice" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="m" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="n" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.State" Member="States">
-    <Type Name="State">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="current_turn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

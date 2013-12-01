@@ -15,5 +15,7 @@ namespace CoolChess.Checkers
         List<List<Position>> getAvailableMoves(Position p);
 
         List<List<Position>> getCaptureMoves(Position p);
+
+        chessmen getType();
     }
 }

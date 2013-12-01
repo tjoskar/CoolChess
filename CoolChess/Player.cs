@@ -146,7 +146,7 @@ namespace CoolChess
         {
             foreach (Cell cell in this._cells)
             {
-                if (cell.hasPiece() && cell.hasColor(this._color) && (Type)cell.getPiece().getType() == typeof(King))
+                if (cell.hasPiece() && cell.hasColor(this._color) && cell.getPiece().getType() == chessmen.King)
                 {
                     return false;
                 }

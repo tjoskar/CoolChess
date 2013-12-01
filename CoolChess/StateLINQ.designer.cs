@@ -30,12 +30,12 @@ namespace CoolChess
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertCellState(CellState instance);
-    partial void UpdateCellState(CellState instance);
-    partial void DeleteCellState(CellState instance);
     partial void InsertState(State instance);
     partial void UpdateState(State instance);
     partial void DeleteState(State instance);
+    partial void InsertCellState(CellState instance);
+    partial void UpdateCellState(CellState instance);
+    partial void DeleteCellState(CellState instance);
     #endregion
 		
 		public StateLINQDataContext() : 
@@ -68,6 +68,14 @@ namespace CoolChess
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<State> States
+		{
+			get
+			{
+				return this.GetTable<State>();
+			}
+		}
+		
 		public System.Data.Linq.Table<CellState> CellStates
 		{
 			get
@@ -75,12 +83,90 @@ namespace CoolChess
 				return this.GetTable<CellState>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.State")]
+	public partial class State : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<State> States
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _current_turn;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void Oncurrent_turnChanging(int value);
+    partial void Oncurrent_turnChanged();
+    #endregion
+		
+		public State()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int Id
 		{
 			get
 			{
-				return this.GetTable<State>();
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_current_turn", DbType="Int NOT NULL")]
+		public int current_turn
+		{
+			get
+			{
+				return this._current_turn;
+			}
+			set
+			{
+				if ((this._current_turn != value))
+				{
+					this.Oncurrent_turnChanging(value);
+					this.SendPropertyChanging();
+					this._current_turn = value;
+					this.SendPropertyChanged("current_turn");
+					this.Oncurrent_turnChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -242,92 +328,6 @@ namespace CoolChess
 					this._n = value;
 					this.SendPropertyChanged("n");
 					this.OnnChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.State")]
-	public partial class State : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _current_turn;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void Oncurrent_turnChanging(int value);
-    partial void Oncurrent_turnChanged();
-    #endregion
-		
-		public State()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_current_turn", DbType="Int NOT NULL")]
-		public int current_turn
-		{
-			get
-			{
-				return this._current_turn;
-			}
-			set
-			{
-				if ((this._current_turn != value))
-				{
-					this.Oncurrent_turnChanging(value);
-					this.SendPropertyChanging();
-					this._current_turn = value;
-					this.SendPropertyChanged("current_turn");
-					this.Oncurrent_turnChanged();
 				}
 			}
 		}

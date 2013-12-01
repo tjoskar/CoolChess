@@ -48,9 +48,10 @@ namespace CoolChess.Checkers
             return _pice.getCaptureMoves(p);
         }
 
-        public object getType()
+        public chessmen getType()
         {
-            return _pice.GetType();
+            //return _pice.GetType();
+            return _pice.getType();
         }
     }
 }
