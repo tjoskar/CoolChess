@@ -38,6 +38,7 @@ namespace CoolChess
             this._whitePlayer = new Player(_cells, players.White);
             this._currentTurn = players.White;
             this._mainWindow.setWhoseTurn(this._currentTurn);
+            this._mainWindow.hideGameOver();
         }
 
         /* This will reset the whole game board */
@@ -202,6 +203,7 @@ namespace CoolChess
             }
             this._currentTurn = (players)state.current_turn;
             this._mainWindow.setWhoseTurn(this._currentTurn);
+            this._mainWindow.hideGameOver();
         }
     }
 }
