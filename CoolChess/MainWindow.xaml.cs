@@ -82,6 +82,11 @@ namespace CoolChess
                 this.GameOver.Content = "";
             }
         }
+        
+        public void hideGameOver()
+        {
+            this.GameOver.Content = "";
+        }
 
         public void setWhoseTurn(players currentTurn)
         {
