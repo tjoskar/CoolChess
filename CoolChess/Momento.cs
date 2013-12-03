@@ -34,7 +34,7 @@ namespace CoolChess
             this.db.ExecuteCommand("TRUNCATE TABLE State");
             State s = new State() {
                 current_turn = (int)currentTurn,
-                Id = stateID++
+                Id = ++stateID
             };
             this.db.States.InsertOnSubmit(s);
             this.db.SubmitChanges();
@@ -79,7 +79,7 @@ namespace CoolChess
                     if (cell.hasPiece()) {
                         this.db.CellStates.InsertOnSubmit(
                             new CellState() {
-                                Id = cellStateID++,
+                                Id = ++cellStateID,
                                 color = (int)cell.getPiece().getColor(),
                                 m = m,
                                 n = n,
@@ -95,10 +95,16 @@ namespace CoolChess
 
         public State fetchState()
         {
-            return (
+            State s = (
                 from st in this.db.States
                 select st
             ).FirstOrDefault();
+            if (s != null)
+            {
+                stateID = s.Id;
+                cellStateID = 64 * s.Id;
+            }
+            return s;
         }
 
         public IQueryable<CellState> fetchCellState(State state)
