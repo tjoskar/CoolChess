@@ -18,7 +18,7 @@ namespace UnitTestProject
             {
                 for (int n = 0; n < 8; n++)
                 {
-                    cells[m, n] = new Cell();
+                    cells[m, n] = new Cell(cellColor.None);
                 }
             }
 

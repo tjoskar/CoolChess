@@ -263,6 +263,7 @@
 		<row><td>NewBinary16</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\InstallFirstUse.ico</td></row>
 		<row><td>NewBinary17</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\InstallPartial.ico</td></row>
 		<row><td>NewBinary18</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\InstallStateMenu.ico</td></row>
+		<row><td>NewBinary19</td><td/><td>&lt;ISProductFolder&gt;\redist\Language independent\i386\SerialNumCAHelper.dll</td></row>
 		<row><td>NewBinary2</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\New.ibd</td></row>
 		<row><td>NewBinary3</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\Up.ibd</td></row>
 		<row><td>NewBinary4</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\WarningIcon.ibd</td></row>
@@ -340,8 +341,8 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>CoolChess.exe</td><td>{974AD0FB-0CA6-4D51-BDCF-02D3D85FD3B3}</td><td>INSTALLDIR</td><td>2</td><td/><td>coolchess.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>CoolChess.vshost.exe</td><td>{694C749F-0486-4026-870C-EF8E315F2D90}</td><td>INSTALLDIR</td><td>2</td><td/><td>coolchess.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CoolChess.exe</td><td>{7EDE3096-591A-404F-9D0B-744575DC6E14}</td><td>INSTALLDIR</td><td>2</td><td/><td>coolchess.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>CoolChess.vshost.exe</td><td>{47405E01-2E48-4ACC-80DB-E81781EA0249}</td><td>INSTALLDIR</td><td>2</td><td/><td>coolchess.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{CE4C82BB-FB99-4B8E-9ACC-ECFBF49565BA}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1012,8 +1013,9 @@
 		<row><td>SetupCompleteError</td><td>Finish</td><td>DoAction</td><td>ShowMsiLog</td><td>MsiLogFileLocation And (ISSHOWMSILOG="1")</td><td>3</td></row>
 		<row><td>SetupCompleteError</td><td>Finish</td><td>EndDialog</td><td>Exit</td><td>1</td><td>2</td></row>
 		<row><td>SetupCompleteSuccess</td><td>OK</td><td>DoAction</td><td>CleanUp</td><td>ISSCRIPTRUNNING="1"</td><td>1</td></row>
-		<row><td>SetupCompleteSuccess</td><td>OK</td><td>DoAction</td><td>ShowMsiLog</td><td>MsiLogFileLocation And (ISSHOWMSILOG="1") And NOT ISENABLEDWUSFINISHDIALOG</td><td>6</td></row>
-		<row><td>SetupCompleteSuccess</td><td>OK</td><td>EndDialog</td><td>Exit</td><td>1</td><td>2</td></row>
+		<row><td>SetupCompleteSuccess</td><td>OK</td><td>DoAction</td><td>LaunchProgramFileFromSetupCompleteSuccess</td><td>LAUNCHPROGRAM And PROGRAMFILETOLAUNCHATEND &lt;&gt; "" And NOT Installed</td><td>2</td></row>
+		<row><td>SetupCompleteSuccess</td><td>OK</td><td>DoAction</td><td>ShowMsiLog</td><td>MsiLogFileLocation And (ISSHOWMSILOG="1") And NOT ISENABLEDWUSFINISHDIALOG</td><td>7</td></row>
+		<row><td>SetupCompleteSuccess</td><td>OK</td><td>EndDialog</td><td>Exit</td><td>1</td><td>3</td></row>
 		<row><td>SetupError</td><td>A</td><td>EndDialog</td><td>ErrorAbort</td><td>1</td><td>0</td></row>
 		<row><td>SetupError</td><td>C</td><td>EndDialog</td><td>ErrorCancel</td><td>1</td><td>0</td></row>
 		<row><td>SetupError</td><td>I</td><td>EndDialog</td><td>ErrorIgnore</td><td>1</td><td>0</td></row>
@@ -1067,6 +1069,7 @@
 		<row><td>ISSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFiles</td><td/><td/></row>
 		<row><td>ISSelfRegisterFinalize</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFinalize</td><td/><td/></row>
 		<row><td>ISUnSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISUnSelfRegisterFiles</td><td/><td/></row>
+		<row><td>LaunchProgramFileFromSetupCompleteSuccess</td><td>1</td><td>NewBinary19</td><td>LaunchProgram</td><td/><td/></row>
 		<row><td>SetARPINSTALLLOCATION</td><td>51</td><td>ARPINSTALLLOCATION</td><td>[INSTALLDIR]</td><td/><td/></row>
 		<row><td>SetAllUsersProfileNT</td><td>51</td><td>ALLUSERSPROFILE</td><td>[%SystemRoot]\Profiles\All Users</td><td/><td/></row>
 		<row><td>ShowMsiLog</td><td>226</td><td>SystemFolder</td><td>[SystemFolder]notepad.exe "[MsiLogFileLocation]"</td><td/><td>Shows Property-driven MSI Log</td></row>
@@ -1880,14 +1883,14 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>coolchess.exe</td><td>CoolChess.exe</td><td>COOLCH~1.EXE|CoolChess.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Oskar\Documents\Visual Studio 2012\Projects\CoolChess\CoolChess\bin\Debug\CoolChess.exe</td><td>1</td><td/></row>
-		<row><td>coolchess.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>COOLCH~1.CON|CoolChess.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Oskar\Documents\Visual Studio 2012\Projects\CoolChess\CoolChess\bin\Debug\CoolChess.exe.config</td><td>1</td><td/></row>
-		<row><td>coolchess.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>COOLCH~1.PDB|CoolChess.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Oskar\Documents\Visual Studio 2012\Projects\CoolChess\CoolChess\bin\Debug\CoolChess.pdb</td><td>1</td><td/></row>
-		<row><td>coolchess.vshost.exe</td><td>CoolChess.vshost.exe</td><td>COOLCH~1.EXE|CoolChess.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Oskar\Documents\Visual Studio 2012\Projects\CoolChess\CoolChess\bin\Debug\CoolChess.vshost.exe</td><td>1</td><td/></row>
-		<row><td>coolchess.vshost.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>COOLCH~1.CON|CoolChess.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Oskar\Documents\Visual Studio 2012\Projects\CoolChess\CoolChess\bin\Debug\CoolChess.vshost.exe.config</td><td>1</td><td/></row>
-		<row><td>coolchess.vshost.exe.manifes</td><td>ISX_DEFAULTCOMPONENT</td><td>COOLCH~1.MAN|CoolChess.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Oskar\Documents\Visual Studio 2012\Projects\CoolChess\CoolChess\bin\Debug\CoolChess.vshost.exe.manifest</td><td>1</td><td/></row>
-		<row><td>statedatebase.mdf</td><td>ISX_DEFAULTCOMPONENT</td><td>STATED~1.MDF|StateDatebase.mdf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Oskar\Documents\Visual Studio 2012\Projects\CoolChess\CoolChess\bin\Debug\StateDatebase.mdf</td><td>1</td><td/></row>
-		<row><td>statedatebase_log.ldf</td><td>ISX_DEFAULTCOMPONENT</td><td>STATED~1.LDF|StateDatebase_log.ldf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Oskar\Documents\Visual Studio 2012\Projects\CoolChess\CoolChess\bin\Debug\StateDatebase_log.ldf</td><td>1</td><td/></row>
+		<row><td>coolchess.exe</td><td>CoolChess.exe</td><td>COOLCH~1.EXE|CoolChess.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Tjoskar\Documents\GitHub\CoolChess\CoolChess\bin\Debug\CoolChess.exe</td><td>1</td><td/></row>
+		<row><td>coolchess.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>COOLCH~1.CON|CoolChess.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Tjoskar\Documents\GitHub\CoolChess\CoolChess\bin\Debug\CoolChess.exe.config</td><td>1</td><td/></row>
+		<row><td>coolchess.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>COOLCH~1.PDB|CoolChess.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Tjoskar\Documents\GitHub\CoolChess\CoolChess\bin\Debug\CoolChess.pdb</td><td>1</td><td/></row>
+		<row><td>coolchess.vshost.exe</td><td>CoolChess.vshost.exe</td><td>COOLCH~1.EXE|CoolChess.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Tjoskar\Documents\GitHub\CoolChess\CoolChess\bin\Debug\CoolChess.vshost.exe</td><td>1</td><td/></row>
+		<row><td>coolchess.vshost.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>COOLCH~1.CON|CoolChess.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Tjoskar\Documents\GitHub\CoolChess\CoolChess\bin\Debug\CoolChess.vshost.exe.config</td><td>1</td><td/></row>
+		<row><td>coolchess.vshost.exe.manifes</td><td>ISX_DEFAULTCOMPONENT</td><td>COOLCH~1.MAN|CoolChess.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Tjoskar\Documents\GitHub\CoolChess\CoolChess\bin\Debug\CoolChess.vshost.exe.manifest</td><td>1</td><td/></row>
+		<row><td>statedatebase.mdf</td><td>ISX_DEFAULTCOMPONENT</td><td>STATED~1.MDF|StateDatebase.mdf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Tjoskar\Documents\GitHub\CoolChess\CoolChess\bin\Debug\StateDatebase.mdf</td><td>1</td><td/></row>
+		<row><td>statedatebase_log.ldf</td><td>ISX_DEFAULTCOMPONENT</td><td>STATED~1.LDF|StateDatebase_log.ldf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Tjoskar\Documents\GitHub\CoolChess\CoolChess\bin\Debug\StateDatebase_log.ldf</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2031,8 +2034,8 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>CoolChess.exe</td><td/><td/><td>_AC3B7C90_9295_4C29_9F05_7C7D5839A4A1_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>CoolChess.vshost.exe</td><td/><td/><td>_431B6DD4_77CB_4B37_8F82_3FFFC20118C1_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CoolChess.exe</td><td/><td/><td>_BBFA1104_BE34_4635_8410_228BD7D73B2A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>CoolChess.vshost.exe</td><td/><td/><td>_79EDEBE2_C15A_4DC8_A85E_4DE8FE881E8A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_D9B2CD23_E268_4AFB_94D3_9C4ACED54FFC_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -2650,7 +2653,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Oskars Production</td><td>0</td><td/><td>371318292</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Oskars Production</td><td>0</td><td/><td>505535219</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>371289620</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>371289620</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>371314228</td></row>
@@ -3467,6 +3470,8 @@
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>371289620</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>LAUNCH~1.EXE|Launch CoolChess.exe</td><td>0</td><td/><td>371293812</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch CoolChess.vshost.exe</td><td>0</td><td/><td>371293812</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch CoolChess.exe</td><td>0</td><td/><td>505529203</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch CoolChess.vshost.exe</td><td>0</td><td/><td>505529203</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>371289620</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>371289620</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>371289620</td></row>
@@ -3756,8 +3761,8 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>371289620</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>371289620</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>371291668</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://oskarkarlsson.nu</td><td>0</td><td/><td>371277460</td></row>
-		<row><td>ID_STRING3</td><td>1033</td><td>Oskars Production</td><td>0</td><td/><td>371318292</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://www.OskarsProduction.com</td><td>0</td><td/><td>505535219</td></row>
+		<row><td>ID_STRING3</td><td>1033</td><td>Oskars Production</td><td>0</td><td/><td>505535219</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>371289620</td></row>
 	</table>
 
@@ -3866,7 +3871,9 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>CoolChess.exe_42094354A4F24043AEEF8FDC00D5584D.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>CoolChess.exe_ACF67F91C9344C61B53F65006806675A.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>CoolChess.vshost.e_9DE532FE18E644D48AD78EBEA767489D.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4344,6 +4351,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>IS_SQLSERVER_SERVER</td><td/><td/></row>
 		<row><td>IS_SQLSERVER_USERNAME</td><td>sa</td><td/></row>
 		<row><td>InstallChoice</td><td>AR</td><td/></row>
+		<row><td>LAUNCHPROGRAM</td><td>1</td><td/></row>
+		<row><td>LAUNCHPROGRAMCOMPCODE</td><td>{7EDE3096-591A-404F-9D0B-744575DC6E14}</td><td/></row>
+		<row><td>LAUNCHPROGRAMFILEKEY</td><td>coolchess.exe</td><td/></row>
 		<row><td>LAUNCHREADME</td><td>1</td><td/></row>
 		<row><td>Manufacturer</td><td>##COMPANY_NAME##</td><td/></row>
 		<row><td>PIDKEY</td><td/><td/></row>
@@ -4371,6 +4381,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKAPPPOOLS</td><td>##IDS_PROGMSG_IIS_ROLLBACKAPPPOOLS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
+		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]CoolChess.exe</td><td/></row>
 		<row><td>ProductCode</td><td>{41A50FA9-F9D0-4A37-8CD3-8966A439F562}</td><td/></row>
 		<row><td>ProductName</td><td>Cool Chess</td><td/></row>
 		<row><td>ProductVersion</td><td>1.00.0000</td><td/></row>
@@ -4385,7 +4396,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>RestartManagerOption</td><td>CloseRestart</td><td/></row>
 		<row><td>SERIALNUMBER</td><td/><td/></row>
 		<row><td>SERIALNUMVALSUCCESSRETVAL</td><td>1</td><td/></row>
-		<row><td>SHOWLAUNCHPROGRAM</td><td>0</td><td/></row>
+		<row><td>SHOWLAUNCHPROGRAM</td><td>-1</td><td/></row>
 		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION45FULL</td><td/></row>
 		<row><td>SelectedSetupType</td><td>##IDS__DisplayName_Typical##</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
@@ -4451,8 +4462,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
 		<row><td>CoolChess.exe</td><td>CoolChess.exe</td><td/><td>coolch_1_cool_chess</td><td>2</td></row>
-		<row><td>FileKey1</td><td>CoolChess.exe</td><td/><td>oskars_1_oskars_production</td><td>2</td></row>
-		<row><td>FileKey2</td><td>CoolChess.exe</td><td/><td>coolch_1_cool_chess</td><td>2</td></row>
+		<row><td>CoolChess.vshost.exe</td><td>CoolChess.vshost.exe</td><td/><td>coolch_1_cool_chess</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4538,7 +4548,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>CoolChess.exe</td><td>coolch_1_cool_chess</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>CoolChess.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>CoolChess.exe_ACF67F91C9344C61B53F65006806675A.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>CoolChess.exe</td><td>coolch_1_cool_chess</td><td>##IDS_SHORTCUT_DISPLAY_NAME3##</td><td>CoolChess.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>CoolChess.exe_42094354A4F24043AEEF8FDC00D5584D.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>CoolChess.vshost.exe</td><td>coolch_1_cool_chess</td><td>##IDS_SHORTCUT_DISPLAY_NAME4##</td><td>CoolChess.vshost.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>CoolChess.vshost.e_9DE532FE18E644D48AD78EBEA767489D.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
