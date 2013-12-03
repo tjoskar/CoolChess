@@ -8,11 +8,11 @@ namespace CoolChess.Checkers
 {
     public class Pawn : ChessmanInterface
     {
-        private players _color;
+        private playerColor _color;
 
         public Pawn() {}
         
-        public Pawn(players color)
+        public Pawn(playerColor color)
         {
             this._color = color;
         }
@@ -22,7 +22,7 @@ namespace CoolChess.Checkers
             cell.piece.ContentTemplate = cell.getTemplate("Pawn");
         }
 
-        public players getColor()
+        public playerColor getColor()
         {
             return this._color;
         }
@@ -31,7 +31,7 @@ namespace CoolChess.Checkers
         {
             List<List<Position>> positionList = new List<List<Position>>();
             List<Position> t = new List<Position>();
-            if (this._color == players.Black)
+            if (this._color == playerColor.Black)
             {
                 if (p.m == 1) // Start potiition
                 {
@@ -63,7 +63,7 @@ namespace CoolChess.Checkers
         {
             List<List<Position>> positionList = new List<List<Position>>();
             List<Position> t = new List<Position>();
-            if (this._color == players.Black)
+            if (this._color == playerColor.Black)
             {
                 if (p.n + 1 < 8 && p.m + 1 < 8)
                 {

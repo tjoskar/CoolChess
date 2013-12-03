@@ -22,8 +22,8 @@ namespace UnitTestProject
                 }
             }
 
-            Player blackPlayer = new Player(cells, players.Black);
-            Player whitePlayer = new Player(cells, players.White);
+            Player blackPlayer = new Player(cells, playerColor.Black);
+            Player whitePlayer = new Player(cells, playerColor.White);
 
             Assert.IsFalse(blackPlayer.isKingDead());
             Assert.IsFalse(whitePlayer.isKingDead());

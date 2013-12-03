@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace CoolChess
 {
+    /*
+     * Don't be misled by that name. It is not a design pattern.
+     * This class is used to communicate with the database
+     */
     public class Momento
     {
-
         private StateLINQDataContext db;
-        private static Momento instance = null;
+        private static Momento instance = null;     // It should only exist one instace of this class
         private static int stateID = 0;
         private static int cellStateID = 0;
 
@@ -29,9 +32,9 @@ namespace CoolChess
             return instance;
         }
 
-        public void saveState(players currentTurn, Cell[,] cells)
+        public void saveState(playerColor currentTurn, Cell[,] cells)
         {
-            this.db.ExecuteCommand("TRUNCATE TABLE State");
+            this.db.ExecuteCommand("TRUNCATE TABLE State");     // May seem harsh but we are only interested to save one row 
             State s = new State() {
                 current_turn = (int)currentTurn,
                 Id = ++stateID
@@ -46,25 +49,6 @@ namespace CoolChess
             }
 
             this.saveCells(state, cells);
-
-            /*var state = (
-                from st in DB.States
-                select st
-            ).FirstOrDefault();
-            if (state != null)
-            {
-                //There is a record
-            }
-
-            var cells = (
-                from c in this.db.CellStates
-                where c.state_id == state.Id
-                select c
-            );
-            foreach (var ce in cells)
-            {
-                //Do something
-            }*/
         }
 
         private void saveCells(State state, Cell[,] cells)

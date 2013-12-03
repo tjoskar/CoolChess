@@ -8,9 +8,9 @@ namespace CoolChess.Checkers
 {
     public class Bishop : ChessmanInterface
     {
-        private players _color;
+        private playerColor _color;
 
-        public Bishop(players color)
+        public Bishop(playerColor color)
         {
             this._color = color;
         }
@@ -20,7 +20,7 @@ namespace CoolChess.Checkers
             cell.piece.ContentTemplate = cell.getTemplate("Bishop");
         }
 
-        public players getColor()
+        public playerColor getColor()
         {
             return this._color;
         }

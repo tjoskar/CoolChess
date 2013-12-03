@@ -11,9 +11,9 @@ namespace CoolChess.Checkers
 {
     public class Rook : ChessmanInterface
     {
-        private players _color;
+        private playerColor _color;
 
-        public Rook(players color)
+        public Rook(playerColor color)
         {
             this._color = color;
         }
@@ -23,7 +23,7 @@ namespace CoolChess.Checkers
             cell.piece.ContentTemplate = cell.getTemplate("Rook");
         }
 
-        public players getColor()
+        public playerColor getColor()
         {
             return this._color;
         }

@@ -18,7 +18,7 @@ namespace UnitTestProject
         public void TestCaptureQueen()
         {
             // Arrange
-            Chessman queen = new Chessman(new Queen(players.Black));
+            Chessman queen = new Chessman(new Queen(playerColor.Black));
             Position position = new Position(4, 4);
             List<Position> expected = new List<Position> {
                 (new Position(4, 0)), (new Position(4, 1)), (new Position(4, 2)), (new Position(4, 3)), (new Position(4, 5)), (new Position(4, 6)), (new Position(4, 7)),
@@ -38,7 +38,7 @@ namespace UnitTestProject
         public void TestCaptureBishop()
         {
             // Arrange
-            Chessman bishop = new Chessman(new Bishop(players.Black));
+            Chessman bishop = new Chessman(new Bishop(playerColor.Black));
             Position position = new Position(4, 4);
             List<Position> expected = new List<Position> {
                 (new Position(0, 0)), (new Position(1, 1)), (new Position(2, 2)), (new Position(3, 3)), (new Position(5, 5)), (new Position(6, 6)), (new Position(7, 7)),
@@ -56,7 +56,7 @@ namespace UnitTestProject
         public void TestCaptureKing()
         {
             // Arrange
-            Chessman king = new Chessman(new King(players.Black));
+            Chessman king = new Chessman(new King(playerColor.Black));
             Position position = new Position(4, 4);
             List<Position> expected = new List<Position> {
                 (new Position(position.n,     position.m - 1)),
@@ -80,7 +80,7 @@ namespace UnitTestProject
         public void TestCaptureKnight()
         {
             // Arrange
-            Chessman knight = new Chessman(new Knight(players.Black));
+            Chessman knight = new Chessman(new Knight(playerColor.Black));
             Position position = new Position(4, 4);
             List<Position> expected = new List<Position> {
                 (new Position(3, 2)),
@@ -104,7 +104,7 @@ namespace UnitTestProject
         public void TestCaptureRook()
         {
             // Arrange
-            Chessman rook = new Chessman(new Rook(players.Black));
+            Chessman rook = new Chessman(new Rook(playerColor.Black));
             Position position = new Position(4, 4);
             List<Position> expected = new List<Position> {
                 (new Position(4, 0)), (new Position(4, 1)), (new Position(4, 2)), (new Position(4, 3)), (new Position(4, 5)), (new Position(4, 6)), (new Position(4, 7)),
@@ -122,7 +122,7 @@ namespace UnitTestProject
         public void TestCapturePawn()
         {
             // Arrange
-            Chessman pawn = new Chessman(new Pawn(players.Black));
+            Chessman pawn = new Chessman(new Pawn(playerColor.Black));
             Position position = new Position(4, 4);
             List<Position> expected = new List<Position> {
                 (new Position(position.n + 1, position.m + 1)),

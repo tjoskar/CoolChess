@@ -12,18 +12,18 @@ namespace CoolChess
     public class Player
     {
         private Cell[,] _cells;
-        private players _color;
-        private Position _selected = null;
+        private playerColor _color;
+        private Position _selected = null; // Current selected position by a user
         private List<List<Position>> _availableMoves = new List<List<Position>>();
         private List<List<Position>> _captureMoves = new List<List<Position>>();
 
-        public Player(Cell[,] cells, players color)
+        public Player(Cell[,] cells, playerColor color)
         {
             this._cells = cells;
             this._color = color;
 
             int basePos = 0;
-            if (this._color == players.White)
+            if (this._color == playerColor.White)
             {
                 basePos = 7; // The pieces should be placed at the bottom
             }
@@ -46,10 +46,10 @@ namespace CoolChess
 
         public bool mouseClick(Position p)
         {
-            Cell cell = this._cells[p.m, p.n]; // Selected cell
-            if (cell.hasPiece() && cell.hasColor(this._color)) // The cell contain a chessman of our own
+            Cell cell = this._cells[p.m, p.n];                  // Current selected cell
+            if (cell.hasPiece() && cell.hasColor(this._color))  // The cell contain a chessman of our own
             {
-                // If the user select a new chessman we must reset the bord to its default color
+                // If the user select a new chessman, reset the bord to it's default color
                 if (this._selected != null)
                 {
                     this.resetBoard();
@@ -91,10 +91,10 @@ namespace CoolChess
                     }
                 }
             }
-            else if (this._selected != null)
+            else if (this._selected != null) // The user has select a chessman of our own "kind" and have now selected a cell that we don't own. 
             {
                 // Should we move?
-                // Check if the current cell is within range
+                // Check if the cell is within range
                 foreach (List<Position> posList in this._availableMoves)
                 {
                     foreach (Position pos in posList)
@@ -119,7 +119,7 @@ namespace CoolChess
                 {
                     foreach (Position pos in posList)
                     {
-                        // The clicked cell is the same as 'pos' and the cell as a pice and it is not one of ours.. Let's capture it.
+                        // The selected cell is the same as 'pos' and the cell as a pice and it is not one of ours.. Let's capture it.
                         if (pos.m == p.m && pos.n == p.n && this._cells[pos.m, pos.n].hasPiece() && !this._cells[pos.m, pos.n].hasColor(this._color))
                         {
                             movePice(this._cells[this._selected.m, this._selected.n], cell);    // Move the pice
@@ -142,6 +142,7 @@ namespace CoolChess
             from.removePiece();
         }
 
+        // Check if the king is dead, ie. if the other player has won.
         public bool isKingDead()
         {
             foreach (Cell cell in this._cells)

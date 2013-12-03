@@ -10,7 +10,7 @@ namespace CoolChess.Checkers
     {
         void setTemplate(Cell cell);
 
-        players getColor();
+        playerColor getColor();
 
         List<List<Position>> getAvailableMoves(Position p);
 

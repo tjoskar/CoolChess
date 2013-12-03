@@ -10,7 +10,7 @@ namespace CoolChess
      * |
      * v
     */
-    public class Position : IEquatable<Position>
+    public class Position
     {
         public int m { get; set; }
         public int n { get; set; }

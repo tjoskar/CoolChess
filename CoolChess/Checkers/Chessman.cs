@@ -17,7 +17,7 @@ namespace CoolChess.Checkers
         public Chessman(ChessmanInterface strategy)
         {
             this._pice = strategy;
-            if (this._pice.getColor() == players.White) {
+            if (this._pice.getColor() == playerColor.White) {
                 FillColor = new SolidColorBrush(Colors.White);
                 StrokeColor = new SolidColorBrush(Colors.Black);
             }
@@ -33,7 +33,7 @@ namespace CoolChess.Checkers
             _pice.setTemplate(cell);
         }
 
-        public players getColor()
+        public playerColor getColor()
         {
             return _pice.getColor();
         }
@@ -50,7 +50,6 @@ namespace CoolChess.Checkers
 
         public chessmen getType()
         {
-            //return _pice.GetType();
             return _pice.getType();
         }
     }

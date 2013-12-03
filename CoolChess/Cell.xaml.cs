@@ -22,12 +22,15 @@ namespace CoolChess
         public SolidColorBrush pieceFillColor { get; set; }
         private Chessman chessman = null;
         private static Dictionary<string, DataTemplate> templates = new Dictionary<string, DataTemplate>();
-        private players _color;
+        private cellColor _color;
 
-        public Cell()
+        public Cell(cellColor color)
         {
             InitializeComponent();
-            // It will exist 64 Cell instances but only templates Dictionary
+            this._color = color;
+            this.restore();
+
+            // It will exist 64 Cell instances but only one templates Dictionary (static)
             if (templates.Count() == 0)
             {
                 templates.Add("Rook", (DataTemplate)FindResource("RookTemplate"));
@@ -41,14 +44,14 @@ namespace CoolChess
 
         public void setBlack()
         {
-            this._color = players.Black;
+            this._color = cellColor.Black;
             this.hide();
             this.black.Visibility = Visibility.Visible;
         }
 
         public void setWhite()
         {
-            this._color = players.White;
+            this._color = cellColor.White;
             this.hide();
             this.white.Visibility = Visibility.Visible;
         }
@@ -74,11 +77,11 @@ namespace CoolChess
         // Restor to the default color
         public void restore()
         {
-            if (this._color == players.Black)
+            if (this._color == cellColor.Black)
             {
                 this.setBlack();
             }
-            else if (this._color == players.White)
+            else if (this._color == cellColor.White)
             {
                 this.setWhite();
             }
@@ -137,7 +140,7 @@ namespace CoolChess
             }
         }
 
-        public bool hasColor(players p)
+        public bool hasColor(playerColor p)
         {
             if (this.hasPiece())
             {

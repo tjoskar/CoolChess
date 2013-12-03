@@ -13,32 +13,32 @@ namespace CoolChess
      */
     class Board
     {
-        private Grid _board;
         private Cell[,] _cells = new Cell[8, 8];
         private Player _blackPlayer;
         private Player _whitePlayer;
-        private MainWindow _mainWindow;
-        private players _currentTurn { get; set; }
+        private MainWindow _mainWindow;                 // Reference to main window which acts as a bridge to the GUI                        
+        private playerColor _currentTurn { get; set; }
 
         public Board(MainWindow mainWindow)
         {
             this._mainWindow = mainWindow;
-            this._board = mainWindow.Board;
             this.createNewBorad();
+
+            // Show loading button if there exist a saved game
             if (Momento.getInstance().existState())
             {
-                this._mainWindow.makeLoadButtoVisible();
+                this._mainWindow.makeLoadButtonVisible();
             }
         }
 
         public void createNewBorad()
         {
-            this.paintBoard();
-            this._blackPlayer = new Player(_cells, players.Black);
-            this._whitePlayer = new Player(_cells, players.White);
-            this._currentTurn = players.White;
-            this._mainWindow.setWhoseTurn(this._currentTurn);
-            this._mainWindow.hideGameOver();
+            this.paintBoard();                                          // Create new cells and paint them black and white
+            this._blackPlayer = new Player(_cells, playerColor.Black);      // We need a new black player
+            this._whitePlayer = new Player(_cells, playerColor.White);      // And a white one
+            this._currentTurn = playerColor.White;                          // White player always start
+            this._mainWindow.setWhoseTurn(this._currentTurn);           // Tell the user
+            this._mainWindow.hideGameOver();                            // Hide the "Game Over" label until one of the player wins
         }
 
         /* This will reset the whole game board */
@@ -48,20 +48,20 @@ namespace CoolChess
             {
                 for (int n = 0; n < 8; n++)
                 {
-                    Cell cell = new Cell();
+                    Cell cell;
                     if ((m % 2 == 0 && n % 2 == 0) || (m % 2 != 0 && n % 2 != 0))
                     {
-                        cell.setBlack();
+                        cell = new Cell(cellColor.Black);
                     }
                     else
                     {
-                        cell.setWhite();
+                        cell = new Cell(cellColor.White);
                     }
                     this._cells[m, n] = cell;
 
                     Grid.SetColumn(cell, n);
                     Grid.SetRow(cell, m);
-                    this._board.Children.Add(cell);
+                    this._mainWindow.Board.Children.Add(cell);
                 }
             }
         }
@@ -108,14 +108,14 @@ namespace CoolChess
         /* Forwrd mouse click to the current player */
         public void mouseClick(Position p)
         {
-            if (this._currentTurn == players.Black)
+            if (this._currentTurn == playerColor.Black)
             {
                 if (this._blackPlayer.mouseClick(p))
                 {
                     this.swapPlayer();
                 }
             }
-            else if (this._currentTurn == players.White)
+            else if (this._currentTurn == playerColor.White)
             {
                 if (this._whitePlayer.mouseClick(p))
                 {
@@ -127,7 +127,7 @@ namespace CoolChess
         private void swapPlayer()
         {
             this.resetBoard();
-            if (this._currentTurn == players.White)
+            if (this._currentTurn == playerColor.White)
             {
                 if (this._blackPlayer.isKingDead())
                 {
@@ -135,11 +135,11 @@ namespace CoolChess
                 }
                 else
                 {
-                    this._currentTurn = players.Black;
+                    this._currentTurn = playerColor.Black;
                     this._mainWindow.setWhoseTurn(this._currentTurn);
                 }
             }
-            else if (this._currentTurn == players.Black)
+            else if (this._currentTurn == playerColor.Black)
             {
                 if (this._whitePlayer.isKingDead())
                 {
@@ -147,7 +147,7 @@ namespace CoolChess
                 }
                 else
                 {
-                    this._currentTurn = players.White;
+                    this._currentTurn = playerColor.White;
                     this._mainWindow.setWhoseTurn(this._currentTurn);
                 }
             }
@@ -157,7 +157,7 @@ namespace CoolChess
         private void gameOver()
         {
             this._mainWindow.setGameOver(this._currentTurn);
-            this._currentTurn = players.None;
+            this._currentTurn = playerColor.None;
         }
 
         public void saveGame()
@@ -170,8 +170,11 @@ namespace CoolChess
             State state = Momento.getInstance().fetchState();
             IQueryable<CellState> cellSates = Momento.getInstance().fetchCellState(state);
 
+            // Reset the board color
             this.paintBoard();
 
+            // We only save cells that have game pieces
+            // Go through all saved cells and place the game pieces in their real position 
             foreach (CellState cellState in cellSates)
             {
                 if (cellState.m >= 0 && cellState.m < 8 && cellState.n >= 0 && cellState.n < 8)
@@ -179,29 +182,29 @@ namespace CoolChess
                     switch ((chessmen)cellState.pice)
                     {
                         case chessmen.Bishop:
-                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Bishop((players)cellState.color)));
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Bishop((playerColor)cellState.color)));
                             break;
                         case chessmen.King:
-                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new King((players)cellState.color)));
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new King((playerColor)cellState.color)));
                             break;
                         case chessmen.Knight:
-                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Knight((players)cellState.color)));
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Knight((playerColor)cellState.color)));
                             break;
                         case chessmen.Pawn:
-                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Pawn((players)cellState.color)));
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Pawn((playerColor)cellState.color)));
                             break;
                         case chessmen.Queen:
-                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Queen((players)cellState.color)));
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Queen((playerColor)cellState.color)));
                             break;
                         case chessmen.Rook:
-                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Rook((players)cellState.color)));
+                            this._cells[(int)cellState.m, (int)cellState.n].setPiece(new Chessman(new Rook((playerColor)cellState.color)));
                             break;
                         default:
                             break;
                     }
                 }
             }
-            this._currentTurn = (players)state.current_turn;
+            this._currentTurn = (playerColor)state.current_turn;
             this._mainWindow.setWhoseTurn(this._currentTurn);
             this._mainWindow.hideGameOver();
         }

@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Diagnostics;
 
 namespace CoolChess
 {
@@ -56,24 +55,18 @@ namespace CoolChess
         */
         private void Board_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Debug.WriteLine("Board_MouseRightButtonDown");
             Point point = e.GetPosition(this.Board);
             Position p = new Position(Math.Min((int)(point.X / this.borad.getCellWidth()), 7), Math.Min((int)(point.Y / this.borad.getCellHeight()), 7));
-            Debug.WriteLine("point.x: " + point.X);
-            Debug.WriteLine("CellWidth: " + this.borad.getCellWidth());
-            Debug.WriteLine("point.X / this.borad.getCellWidth(): " + point.X / this.borad.getCellWidth());
-            Debug.WriteLine(p.m);
-            Debug.WriteLine(p.n);
             borad.mouseClick(p);
         }
 
-        public void setGameOver(players winner)
+        public void setGameOver(playerColor winner)
         {
-            if (winner == players.Black)
+            if (winner == playerColor.Black)
             {
                 this.GameOver.Content = "Black Wins";
             }
-            else if (winner == players.White)
+            else if (winner == playerColor.White)
             {
                 this.GameOver.Content = "White Wins";
             }
@@ -85,22 +78,23 @@ namespace CoolChess
         
         public void hideGameOver()
         {
+            // We don't need to hide the element, we only need to remove the content 
             this.GameOver.Content = "";
         }
 
-        public void setWhoseTurn(players currentTurn)
+        public void setWhoseTurn(playerColor currentTurn)
         {
-            if (currentTurn == players.Black)
+            if (currentTurn == playerColor.Black)
             {
                 this.WhoseTurn = "Black";
             }
-            else if (currentTurn == players.White)
+            else if (currentTurn == playerColor.White)
             {
                 this.WhoseTurn = "White";
             }
         }
 
-        public void makeLoadButtoVisible()
+        public void makeLoadButtonVisible()
         {
             this.loadButton.Visibility = Visibility.Visible;
         }
@@ -113,7 +107,8 @@ namespace CoolChess
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
             this.borad.saveGame();
-            this.makeLoadButtoVisible();
+            // Assuming that all went well
+            this.makeLoadButtonVisible();
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
